@@ -1,0 +1,36 @@
+*** RR Simulator ***
+Enter configuration file name: RRThumb/config.cfg
+Enter slice time: 1000
+Enter cost of system call: 10
+Enter cost of context switch: 11
+Enter trace level: 31
+Time: 0000000000 Kernel: SysCall(MAKE_DEVICE, id=1,name="disk")
+Time: 0000000010 Kernel: SysCall complete
+Time: 0000000010 Kernel: SysCall(MAKE_DEVICE, id=2,name="CD/ROM")
+Time: 0000000020 Kernel: SysCall complete
+Time: 0000000000 Kernel: SysCall(EXECVE, name="RRThumb/programA.prg")
+Time: 0000000010 Kernel: Context Switch {Idle}, process(pid=1, state=READY, name="RRThumb/programA.prg")).
+Time: 0000000021 Kernel: SysCall complete
+Time: 0000000021 Kernel: SysCall(EXECVE, name="RRThumb/programB.prg")
+Time: 0000000031 Kernel: SysCall complete
+Time: 0000001021 Kernel: Interrupt(TIME_OUT, process(pid=1, state=RUNNING, name="RRThumb/programA.prg"))
+Time: 0000001031 Kernel: Context Switch process(pid=1, state=READY, name="RRThumb/programA.prg"), process(pid=2, state=READY, name="RRThumb/programB.prg")).
+Time: 0000001042 Kernel: Interrupt exit
+Time: 0000002042 Kernel: SysCall(IO_REQUEST, device(id=2), duration=500, process(pid=2, state=RUNNING, name="RRThumb/programB.prg"))
+Time: 0000002052 Kernel: Context Switch process(pid=2, state=WAITING, name="RRThumb/programB.prg"), process(pid=1, state=READY, name="RRThumb/programA.prg")).
+Time: 0000002063 Kernel: SysCall complete
+Time: 0000002552 Kernel: Interrupt(WAKE_UP, device(id=2), process(pid=2, state=WAITING, name="RRThumb/programB.prg"))
+Time: 0000002562 Kernel: Interrupt exit
+Time: 0000003063 Kernel: Interrupt(TIME_OUT, process(pid=1, state=RUNNING, name="RRThumb/programA.prg"))
+Time: 0000003073 Kernel: Context Switch process(pid=1, state=READY, name="RRThumb/programA.prg"), process(pid=2, state=READY, name="RRThumb/programB.prg")).
+Time: 0000003084 Kernel: Interrupt exit
+Time: 0000003584 Kernel: SysCall(IO_REQUEST, device(id=1), duration=2000, process(pid=2, state=RUNNING, name="RRThumb/programB.prg"))
+Time: 0000003594 Kernel: Context Switch process(pid=2, state=WAITING, name="RRThumb/programB.prg"), process(pid=1, state=READY, name="RRThumb/programA.prg")).
+Time: 0000003605 Kernel: SysCall complete
+
+System time: 8069
+Kernel time: 93
+User time: 5300
+Idle time: 1666
+Context switches:50
+CPU utilization: 83.64

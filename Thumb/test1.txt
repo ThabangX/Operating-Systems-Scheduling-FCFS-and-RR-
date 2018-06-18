@@ -1,0 +1,39 @@
+*** RR Simulator ***
+Enter configuration file name: RRThumb/config.cfg
+Enter slice time: 800
+Enter cost of system call: 15
+Enter cost of context switch: 10
+Enter trace level: 35
+Time: 0000000000 Kernel: SysCall(MAKE_DEVICE, id=1,name="disk")
+Time: 0000000015 Kernel: SysCall(MAKE_DEVICE, id=2,name="CD/ROM")
+Time: 0000000030 Simulator: add ExecveEvent(0, RRThumb/programA.prg[0])
+Time: 0000000030 Simulator: add ExecveEvent(0, RRThumb/programB.prg[0])
+Time: 0000000000 Simulator: process ExecveEvent(0, RRThumb/programA.prg[0])
+Time: 0000000000 Kernel: SysCall(EXECVE, name="RRThumb/programA.prg")
+Time: 0000000015 Kernel: Context Switch {Idle}, process(pid=1, state=READY, name="RRThumb/programA.prg")).
+Time: 0000000025 Simulator: add TimeOutEvent(825, 1)
+Time: 0000000025 Simulator: process ExecveEvent(0, RRThumb/programB.prg[0])
+Time: 0000000025 Kernel: SysCall(EXECVE, name="RRThumb/programB.prg")
+Time: 0000000825 Simulator: process TimeOutEvent(825, 1)
+Time: 0000000840 Kernel: Context Switch process(pid=1, state=READY, name="RRThumb/programA.prg"), process(pid=2, state=READY, name="RRThumb/programB.prg")).
+Time: 0000000850 Simulator: add TimeOutEvent(1650, 2)
+Time: 0000001650 Simulator: process TimeOutEvent(1650, 2)
+Time: 0000001665 Kernel: Context Switch process(pid=2, state=READY, name="RRThumb/programB.prg"), process(pid=1, state=READY, name="RRThumb/programA.prg")).
+Time: 0000001675 Simulator: add TimeOutEvent(2475, 1)
+Time: 0000002475 Simulator: process TimeOutEvent(2475, 1)
+Time: 0000002490 Kernel: Context Switch process(pid=1, state=READY, name="RRThumb/programA.prg"), process(pid=2, state=READY, name="RRThumb/programB.prg")).
+Time: 0000002500 Simulator: add TimeOutEvent(3300, 2)
+Time: 0000002700 Kernel: SysCall(IO_REQUEST, device(id=2), duration=500, process(pid=2, state=RUNNING, name="RRThumb/programB.prg"))
+Time: 0000002715 Simulator: add WakeUpEvent(3215, 2, 2)
+Time: 0000002715 Simulator: cancel TimeOutEvent(3300, 2)
+Time: 0000002715 Kernel: Context Switch process(pid=2, state=WAITING, name="RRThumb/programB.prg"), process(pid=1, state=READY, name="RRThumb/programA.prg")).
+Time: 0000002725 Simulator: add TimeOutEvent(3525, 1)
+
+OUTPUT:
+
+System time: 7023
+Kernel time: 43
+User time: 5510
+Idle time: 1490
+Context switches:20
+CPU utilization: 80.27
